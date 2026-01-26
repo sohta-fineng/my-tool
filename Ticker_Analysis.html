@@ -1,46 +1,110 @@
-<div class="container">
-    <h2>Ticker Analysis</h2>
-    <p class="description">銘柄コードを入力してサイトを選択</p>
-    <div class="input-wrapper">
-        <input type="text" id="ticker" placeholder="例: NVDA / 7203" autocomplete="off">
-    </div>
-    
-    <div style="display: flex; flex-direction: column; gap: 10px;">
-        <button onclick="execute('tv')" style="background-color: #2962ff;">TradingViewを開く</button>
-        <button onclick="execute('summary')" style="background-color: #ff9800;">Summaryを開く</button>
-        <button onclick="execute('finance')" style="background-color: #4caf50;">Financeを開く</button>
-    </div>
-
-    <div class="status-labels">
-        <span>TradingView</span>
-        <span>Finviz / Nikkei</span>
-        <span>Yahoo Finance</span>
-    </div>
-</div>
-
-<script>
-    function execute(type) {
-        const input = document.getElementById('ticker').value.trim();
-        if (!input) return;
-
-        const isJapan = /^\d{4}$/.test(input) || /^\d{3}[A-Z]$/i.test(input);
-        let url = "";
-
-        if (isJapan) {
-            const code = input.toUpperCase();
-            // 日本株の条件分岐
-            if (type === 'tv') url = `https://jp.tradingview.com/chart/?symbol=TSE:${code}`;
-            if (type === 'summary') url = `https://www.nikkei.com/nkd/company/?scode=${code}`;
-            if (type === 'finance') url = `https://finance.yahoo.co.jp/quote/${code}.T`;
-        } else {
-            const ticker = input.toUpperCase();
-            // 米国株の条件分岐
-            if (type === 'tv') url = `https://jp.tradingview.com/chart/?symbol=${ticker}`;
-            if (type === 'summary') url = `https://finviz.com/quote.ashx?t=${ticker}`;
-            if (type === 'finance') url = `https://finance.yahoo.co.jp/quote/${ticker}`;
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticker Analysis v2.1</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --border-color: #e0e3eb;
+            --text-main: #131722;
+            --accent-blue: #2962ff;
         }
 
-        // 1つのクリックに対して、1つの窓だけを開く（Safari公認の挙動）
-        if (url) window.open(url, '_blank');
-    }
-</script>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: var(--bg-color);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 360px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; }
+
+        input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 14px 16px;
+            font-size: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            outline: none;
+            text-align: center;
+            background-color: #f8f9fb;
+            margin-bottom: 16px; /* V1に近い余白 */
+        }
+
+        input:focus { border-color: var(--accent-blue); background-color: #fff; }
+
+        /* ボタンを横並びにしてV1のコンパクトさを再現 */
+        .btn-group {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        button {
+            padding: 12px 5px;
+            font-size: 0.75rem; /* 文字を少し小さくして横並びに収める */
+            font-weight: 600;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+
+        button:active { transform: scale(0.95); }
+
+        .btn-tv { background-color: #2962ff; }
+        .btn-summary { background-color: #ff9800; }
+        .btn-finance { background-color: #4caf50; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Ticker Analysis</h2>
+        <input type="text" id="ticker" placeholder="例: NVDA / 7203" autocomplete="off">
+        
+        <div class="btn-group">
+            <button class="btn-tv" onclick="execute('tv')">TV</button>
+            <button class="btn-summary" onclick="execute('summary')">Sum</button>
+            <button class="btn-finance" onclick="execute('finance')">Fin</button>
+        </div>
+    </div>
+
+    <script>
+        function execute(type) {
+            const val = document.getElementById('ticker').value.trim();
+            if (!val) return;
+
+            const isJapan = /^\d{4}$/.test(val) || /^\d{3}[A-Z]$/i.test(val);
+            const code = val.toUpperCase();
+            let url = "";
+
+            if (isJapan) {
+                if (type === 'tv') url = `https://jp.tradingview.com/chart/?symbol=TSE:${code}`;
+                if (type === 'summary') url = `https://www.nikkei.com/nkd/company/?scode=${code}`;
+                if (type === 'finance') url = `https://finance.yahoo.co.jp/quote/${code}.T`;
+            } else {
+                if (type === 'tv') url = `https://jp.tradingview.com/chart/?symbol=${code}`;
+                if (type === 'summary') url = `https://finviz.com/quote.ashx?t=${code}`;
+                if (type === 'finance') url = `https://finance.yahoo.co.jp/quote/${code}`;
+            }
+
+            if (url) window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>
