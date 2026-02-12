@@ -1,0 +1,64 @@
+:root {
+  /* --- Neutral Colors (背景や文字色) --- */
+  --bg-main: #ffffff;
+  --bg-soft: #f8fafc;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  
+  /* Lychee Standard */
+  --lychee-primary: #E57A7A;
+  --lychee-secondary: #C85B5B;
+  --lychee-tertiary: #A8D1B7;
+  --lychee-quaternary: #F9F6E7;
+
+ /* Modern color palette */
+ --modern-dark: #1a1a1a;
+ --modern-light: #f0f0f0;
+ --modern-accent-1: #c1ff72;
+ --modern-accent-2: #00d4ff;
+ --modern-accent-3: #ff0055;
+
+  /* --- Typography --- */
+  --font-en: 'Inter', sans-serif;          /* 英語・メイン用 */
+  --font-ja: "Hiragino Sans", "Meiryo", sans-serif; /* 日本語用 */
+  --font-code: 'JetBrains Mono', monospace; /* 数値・プログラミング用 */
+  --font-yomogi: 'Yomogi', cursive;       /* 和風フォント */
+
+  --font-main: var(--font-en), var(--font-ja);
+
+  --fs-base: 1rem;       /* 16px */
+  --fs-sm: 0.875rem;     /* 14px */
+  --fs-lg: 1.25rem;      /* 20px */
+
+  /* --- Spacing (8px単位の倍数にすると綺麗) --- */
+  --space-1: 0.25rem; /* 4px */
+  --space-2: 0.5rem;  /* 8px */
+  --space-4: 1rem;    /* 16px */
+
+  /* --- Radius --- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+
+  /* --- Animation --- */
+  --transition-base: all 0.2s ease;
+}
+
+/* 基本のフォント */
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-soft);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+
+/* 計算結果やコード（金融・統計用） */
+code, .number, .calc-output {
+  font-family: var(--font-code);
+  font-weight: 500;
+}
+
+/* ちょっとしたメモや日記的な部分（和風） */
+.memo {
+  font-family: var(--font-yomogi);
+  color: var(--text-muted);
+}
