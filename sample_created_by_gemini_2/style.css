@@ -79,3 +79,100 @@ code, .number, .calc-output {
   font-family: var(--font-yomogi);
   color: var(--text-muted);
 }
+/* --- レイアウト設計 --- */
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: var(--space-4);
+}
+
+.dashboard {
+  width: 100%;
+  max-width: 900px;
+}
+
+h1 {
+  font-size: var(--fs-lg);
+  border-left: 4px solid var(--modern-pink);
+  padding-left: var(--space-4);
+  margin-bottom: calc(var(--space-4) * 2);
+  letter-spacing: 0.05em;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-4);
+}
+
+/* --- カードコンポーネント --- */
+.card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  transition: var(--transition-base);
+  backdrop-filter: blur(8px);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.tag {
+  font-size: var(--fs-sm);
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: var(--space-2);
+}
+
+.title-en {
+  margin: 0;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+/* --- 進捗バー --- */
+.progress-bar {
+  background: rgba(255, 255, 255, 0.1);
+  height: 6px;
+  border-radius: var(--radius-sm);
+  margin: var(--space-4) 0;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  transition: width 0.8s ease-in-out;
+}
+
+/* --- 各ルートの色分け --- */
+.economy .tag { color: var(--modern-lime); }
+.economy .progress { background: var(--modern-lime); box-shadow: 0 0 12px var(--modern-lime); }
+
+.cs .tag { color: var(--modern-cyan); }
+.cs .progress { background: var(--modern-cyan); box-shadow: 0 0 12px var(--modern-cyan); }
+
+/* --- ボタン --- */
+.btn {
+  background: transparent;
+  border: 1px solid var(--text-muted);
+  color: var(--text-muted);
+  font-family: var(--font-en);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  width: 100%;
+  transition: var(--transition-base);
+  margin-top: var(--space-2);
+}
+
+.btn:hover {
+  border-color: var(--text-main);
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.05);
+}

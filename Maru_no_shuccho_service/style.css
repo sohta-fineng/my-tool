@@ -79,3 +79,22 @@ code, .number, .calc-output {
   font-family: var(--font-yomogi);
   color: var(--text-muted);
 }
+
+.icon-arrow {
+  /* サイズ指定（ちっちゃく！） */
+  width: 24px;   
+  height: 24px;
+
+  /* 色指定（:rootで定義した色を入れる） */
+  fill: var(--lychee-secondary); 
+
+  /* アニメーションも付けておくと使い回しが楽しくなります */
+  transition: var(--transition-base);
+  cursor: pointer;
+}
+
+/* ホバーした時に色をモダンな青に変える例 */
+.icon-arrow:hover {
+  fill: var(--lychee-primary);
+  transform: scale(1.1); /* 少し大きくする */
+}
