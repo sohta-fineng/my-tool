@@ -1,4 +1,4 @@
-#vector_tools.py
+# vector_tools.py
 
 def calculate_inner_product(a,b):
     # 内積の定義
@@ -41,13 +41,3 @@ def calculate_cosine_similarity(a,b, threshold=0.8):
         status = "not similar"
     
     return cosine_similarity, status
-
-
-# ベクトルの定義
-a=[1,2,2]
-b=[5,4,2]
-
-print("Inner product:", calculate_inner_product(a,b))
-print("L2 norm of a:", calculate_l2_norm(a))
-print("L2 norm of b:", calculate_l2_norm(b))
-print("Cosine similarity:", calculate_cosine_similarity(a,b,threshold=0.85))
